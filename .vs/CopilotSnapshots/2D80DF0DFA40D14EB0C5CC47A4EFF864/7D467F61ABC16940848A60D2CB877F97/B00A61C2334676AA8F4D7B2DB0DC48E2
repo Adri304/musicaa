@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -110,11 +110,10 @@ public class Reproductot : MonoBehaviour
         audio.Cargar(contenidos[indice]);
 
         // Actualizar información visual
-        tituloText.text = contenidos[indice].GetInfo();
-        imagenCaratula.sprite = contenidos[indice].GetCaratula();
+        tituloText.text = contenidos[indice].Titulo;
+        imagenCaratula.sprite = contenidos[indice].Caratula;
 
         // Reiniciar slider
-
         actualizandoSlider = true;
         sliderTiempo.minValue = 0;
         sliderTiempo.maxValue = audio.Duracion();

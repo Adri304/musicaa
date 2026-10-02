@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -6,7 +6,7 @@ using TMPro;
 public class Reproductot : MonoBehaviour
 {
     [Header("Motor de audio")]
-    public MonoBehaviour motorAudio;
+    public MotorAudioUnity motorAudio;
 
     [Header("UI textos")]
     public TextMeshProUGUI tituloText;
@@ -42,12 +42,7 @@ public class Reproductot : MonoBehaviour
 
     void Start()
     {
-        audio = motorAudio as IMotorAudio;
-        if (audio == null)
-        {
-            Debug.LogError("El componente asignado en motorAudio no implementa IMotorAudio");
-            // Evitar NullReferenceException; opcionalmente asignar un fallback aquí.
-        }
+        audio = motorAudio;
 
         // Agregar contenidos
         contenidos.Add(
@@ -110,11 +105,10 @@ public class Reproductot : MonoBehaviour
         audio.Cargar(contenidos[indice]);
 
         // Actualizar información visual
-        tituloText.text = contenidos[indice].GetInfo();
-        imagenCaratula.sprite = contenidos[indice].GetCaratula();
+        tituloText.text = contenidos[indice].Titulo;
+        imagenCaratula.sprite = contenidos[indice].Caratula;
 
         // Reiniciar slider
-
         actualizandoSlider = true;
         sliderTiempo.minValue = 0;
         sliderTiempo.maxValue = audio.Duracion();
